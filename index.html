@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Encriptador de texto" />
-    <script src="script.js" defer></script>
+
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +15,7 @@
   </head>
 
   <body>
+    <!-------------------------------------------------------------->
     <header class="header">
       <a href="https://www.aluracursos.com/" target="_blank"
         ><img src="./assets/logo.svg" alt="logo de alura latam" id="alura-logo"
@@ -42,6 +43,8 @@
       </nav>
     </header>
 
+    <!-------------------------------------------------------------->
+
     <main class="container">
       <section class="container__message">
         <div class="container__message-input_text">
@@ -64,26 +67,44 @@
         </div>
 
         <div class="container__message-buttons">
-          <input class="btns" id="button-encrypt" type="button" value="Encriptar" />
-          <input class="btns" id="button-decrypt" type="button" value="Desencriptar" />
+          <input
+            class="btns"
+            id="btn-encrypt"
+            type="button"
+            value="Encriptar" />
+          <input
+            class="btns"
+            id="btn-decrypt"
+            type="button"
+            value="Desencriptar" />
         </div>
       </section>
+
+      <!-------------------------------------------------------------->
 
       <section class="container__encrypted-message" id="encrypted">
         <div id="no-message">
           <img
             src="./assets/Cyber Security Lock With Wires.svg"
-            alt="candado ciberseguridad" />
+            alt="candado ciberseguridad"
+            id="img-encrypt" />
 
           <h3>Ningún mensaje fue encontrado</h3>
           <p>Ingresa el texto que desee encriptar o desencriptar</p>
         </div>
-        <!-- <div class="container__message-buttons">
+        <div class="hidden" id="show-message">
+          <p id="result"></p>
           <input class="btns" type="button" id="btn-copy" value="Copiar" />
-        </div> -->
+        </div>
       </section>
     </main>
 
+    <!-------------------------------------------------------------->
+
     <footer class="footer">Hoshi-Dev || 2024</footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
   </body>
 </html>

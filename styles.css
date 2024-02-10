@@ -151,7 +151,7 @@ li {
   font-size: 16px;
 }
 
-#button-decrypt {
+#btn-decrypt {
   border: 1px solid var(--dark-blue-300);
   background: var(--gray-100);
   color: var(--dark-blue-300);
@@ -167,6 +167,9 @@ li {
   margin-bottom: 30px;
 }
 
+.hidden{
+  display: none;
+}
 /**------------------FOTTER------------------*/
 .footer {
   display: flex;
