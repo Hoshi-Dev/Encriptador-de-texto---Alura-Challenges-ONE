@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 
   --white: #fff;
   --light-blue-100: #f3f5fc;
@@ -13,13 +14,12 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  position: relative;
   min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding-bottom: 100px;
 
   background: var(--dark-blue-400);
+  color: var(--white);
 }
 
 /*----------------------HEADER----------------------*/
@@ -28,20 +28,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
-  top: 0;
+
   width: 100%;
   height: 80px;
 }
 
-#alura-logo {
+.header__img {
   width: 120px;
   height: 48px;
   margin: 15px;
 }
 
 .header__nav {
-  margin-right: 30px;
+  margin-right: 2em;
+}
+
+.header__nav li {
+  display: inline-block;
+  padding: 0 0.5em;
 }
 
 a {
@@ -49,68 +53,67 @@ a {
   color: var(--white);
 }
 
-li {
-  display: inline-block;
-  right: 0;
-  margin: 10px;
-}
-
-.header__nav-links {
+.header__links {
   transition: 0.5s;
   text-transform: uppercase;
-}
 
-.header__nav-links:hover {
-  color: var(--dark-blue-100);
-  font-size: 20px;
+  &:hover {
+    color: var(--dark-blue-100);
+    font-size: 20px;
 
-  text-shadow: 0 0 10px var(--dark-blue-100), 1px 1px 5px var(--dark-blue-100);
+    text-shadow: 0 0 10px var(--dark-blue-100), 1px 1px 5px var(--dark-blue-100);
+  }
 }
 
 /*---------------------------MAIN---------------------------*/
-/*------------------CONTENEDORES DE TEXTOS------------------*/
+/*------------------MENSAJES A ENCRIPTAR------------------*/
 
 .container {
   display: flex;
   justify-content: center;
-  gap: 20px;
-
-  color: var(--white);
+  gap: 1.5em;
+  padding: 2em;
+  min-height: calc(100vh - 80px - 100px);
+  text-wrap: balance;
 }
 
 .container__message,
 .container__encrypted-message {
+  flex-direction: column;
   background: var(--dark-blue-300);
   border: 1px solid var(--dark-blue-100);
   border-radius: 10px;
-  max-height: 100%;
-  width: 50%;
-  overflow: hidden;
-  padding: 30px;
-}
 
-#encrypted {
-  width: 25%;
+  width: 700px;
+  height: 600px;
+  overflow: hidden;
+  padding: 50px;
+  margin: 2em 0;
+  position: relative;
+
+  &:hover {
+    border: 2px solid var(--dark-blue-100);
+    box-shadow: var(--dark-blue-100) 2px 2px 10px;
+    transition: 0.4s;
+  }
 }
 
 .container__encrypted-message img {
-  margin-bottom: 30px;
   max-width: 100%;
+  margin-bottom: 30px;
 }
 
-.container__message:hover,
-.container__encrypted-message:hover {
-  border: 2px solid var(--dark-blue-100);
-  box-shadow: var(--dark-blue-100) 2px 2px 10px;
-  transition: 0.4s;
+#encrypted {
+  width: 400px;
+  text-align: center;
 }
 
-#tittle {
-  font-size: 40px;
+.container__message__tittle {
+  font-size: 50px;
   margin-bottom: 15px;
 }
 
-#message {
+.container__message__text-input {
   width: 100%;
   max-height: 50%;
   margin-top: 30px;
@@ -120,29 +123,76 @@ li {
   padding: 20px;
   color: var(--dark-blue-100);
   font-size: 20px;
+
+  &:focus {
+    outline: #052051;
+  }
 }
 
-#message:focus {
-  outline: none !important;
+/*------------------VERIFICACIÓN DE TEXTO INGRESADO------------------*/
+
+.container__message__verification {
+  height: 3em;
 }
 
-.container__message_text {
+.container__message__verification > span {
   display: flex;
-  gap: 10px;
-  font-size: 13px;
-  margin-bottom: 40px;
+  align-items: center;
+  margin-top: 0.3em;
+
+  font-size: 14px;
 }
 
-.container__message-buttons {
+.container__message__verification > span img {
+  width: 18px;
+  margin-right: 5px;
+}
+
+.container__message__verification > span.hidden,
+.container__encrypted-message > div.hidden {
+  display: none;
+}
+
+/*------------------BOTONES------------------*/
+
+.container__message__buttons {
   display: flex;
-  width: 100%;
-  justify-content: center;
-
-  gap: 24px;
+  justify-content: space-evenly;
+  position: absolute;
+  bottom: 50px;
+  width: calc(100% - 100px);
 }
 
-.btns {
-  width: 300px;
+#js-btn-copy {
+  position: absolute;
+  bottom: 50px;
+  left: 25%;
+}
+
+
+
+.container__encrypted-message__result > h2{
+  font-family: "Kode Mono", monospace;
+  font-weight: 100;
+  font-size: 26px;
+  margin-bottom: 2em;
+  color: var(--dark-blue-100);
+  text-shadow: var(--dark-blue-400) 3px 3px ;
+}
+.container__encrypted-message__result > p#js-result-message {
+  font-size: 20px;
+  line-height: 1.5em;
+  
+  max-height:400px;
+  overflow-y: auto;
+  padding-inline: 0.8em;
+  
+  
+}
+
+.container__message__buttons input,
+.container__encrypted-message input {
+  width: 200px;
   height: 50px;
   border-radius: 10px;
   border: 1px solid var(--dark-blue-100);
@@ -151,37 +201,44 @@ li {
   font-size: 16px;
 }
 
-#btn-decrypt {
-  border: 1px solid var(--dark-blue-300);
-  background: var(--gray-100);
-  color: var(--dark-blue-300);
-}
-
-.container__encrypted-message {
-  padding: 30px;
-  text-align: center;
-  color: var(--white);
-}
-
-.container__encrypted-message img {
-  margin-bottom: 30px;
-}
-
-.hidden{
-  display: none;
-}
-/**------------------FOTTER------------------*/
+/**------------------FOOTER------------------*/
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
+
   bottom: 0;
   width: 100%;
   height: 100px;
-
-  color: var(--white);
 }
 
 /**------------------MEDIA QUERYS------------------*/
-/*----------------------SMALL----------------------*/
+/*--------------------celulares-------------------*/
+
+@media only screen and (max-width: 767px) {
+}
+
+/*--------------------tablets-------------------*/
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+/**------------------SCROLLBAR PERSONALIZADO------------------*/
+/*--------------------chrome y safari-------------------*/
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-blue-100);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-blue-400);
+}

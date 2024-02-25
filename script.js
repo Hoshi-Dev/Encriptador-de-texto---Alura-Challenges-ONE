@@ -1,76 +1,81 @@
-/*----------------------inserta la posición del cursor----------------------*/
+/*----------------------CAPTURA TODOS LOS ELEMENTOS DEL DOM----------------------*/
+const btnEncryp = document.getElementById("js-btn-encrypt");
+const btnDecrypt = document.getElementById("js-btn-decrypt");
+const btnCopy = document.getElementById("js-btn-copy");
 
-const injectCursorPosition = ({x, y}) => {
-  document.documentElement.style.setProperty("--x", x);
-  document.documentElement.style.setProperty("--y", y);
-};
+const noResult = document.querySelector(
+  ".js-container__encrypted-message__no-result"
+);
+const result = document.querySelector(
+  ".js-container__encrypted-message__result"
+);
+const resultMessage = document.getElementById("js-result-message");
 
-document.body.addEventListener("pointermove", injectCursorPosition);
+const textArea = document.querySelector(".js-container__message__text-input");
+const verifyRed = document.querySelector(
+  ".js-container__message__verification-red"
+);
+const verifyGreen = document.querySelector(
+  ".js-container__message__verification-green"
+);
 
-/*----------------------botones----------------------*/
-const btnEncryp = document.getElementById("btn-encrypt");
-const btnDecrypt = document.getElementById("btn-decrypt");
-const btnCopy = document.getElementById("btn-copy");
+/*--------------------verifica el texto que se ingresa en el textarea----------------------*/
+//minúsculas, sin acentos, acepta números y espacios en blanco
 
-const noMessage = document.getElementById("no-message");
+let regex = /^[a-z0-9\s]+$/; //Expresión regular para la verificación
 
-const showMessage = document.getElementById("show-message");
+function verifyText() {
+  const capturedText = textArea.value;
 
-const result = document.getElementById("result");
+  if (regex.test(capturedText)) {
+    textArea.style.outline = "2px solid green";
+    verifyGreen.classList.remove("hidden");
+    verifyRed.classList.add("hidden");
+    btnEncryp.disabled = false;
+    btnDecrypt.disabled = false;
+  } else if (capturedText == "") {
+    textArea.style.outline = "none";
+    verifyRed.classList.add("hidden");
+    verifyGreen.classList.add("hidden");
+    btnEncryp.disabled = true;
+    btnDecrypt.disabled = true;
 
-//Captura el texto al clickear el boton 'encriptar'
+  } else {
+    textArea.style.outline = "2px solid red";
+    verifyRed.classList.remove("hidden");
+    verifyGreen.classList.add("hidden");
+  }
+}
+//Se activa la verificación cada vez que se levanta una tecla al escribir
+textArea.addEventListener("keyup", verifyText);
+
+
+/*--------------------EVENTOS DE BOTONES ENCRIPTAR/DESENCRIPTAR----------------------*/
+//Captura el texto verificado al clickear el boton 'encriptar'
 btnEncryp.addEventListener("click", () => {
-  const capturedText = document.getElementById("message").value;
-  encryptText(capturedText);
+  const capturedTextVerified = textArea.value;
+  encryptText(capturedTextVerified);
 });
 
 //Captura el texto al clickear el boton 'desencriptar'
 btnDecrypt.addEventListener("click", () => {
-  let newEncryptedText = document.getElementById("message").value;
+  let newEncryptedText = textArea.value;
   decryptText(newEncryptedText);
 });
 
-// Encripta el texto
-function encryptText(capturedText) {
-  let encryptedText;
-  
-  // Llama a la función que verifica el formato del mensaje capturado
-  if (verifyText(capturedText)) {
-    encryptedText = capturedText
-      .replace(/e/g, "enter")
-      .replace(/i/g, "imes")
-      .replace(/a/g, "ai")
-      .replace(/o/g, "ober")
-      .replace(/u/g, "ufat");
-
-    showHideMessage(encryptedText);
-  } else {
-    Swal.fire({
-      title: 'FORMATO INVÁLIDO',
-      text: 'Solo minúsculas y sin acentos.',
-      icon: 'error',
-      background: '#052051',
-      color: '#fff',
-      confirmButtonColor:'#609ed4',
-    });
-  }
-
-  console.log(encryptedText);
+/*--------------------ENCRIPTA EL TEXTO YA PREVIAMENTE VERIFICADO----------------------*/
+function encryptText(params) {
+  let encryptedResult = params
+    .replace(/e/g, "enter")
+    .replace(/i/g, "imes")
+    .replace(/a/g, "ai")
+    .replace(/o/g, "ober")
+    .replace(/u/g, "ufat");
+ 
+  showHideMessage(encryptedResult);
 }
 
-// Copia el texto encriptado al portapapeles
-function copyEncryptedText(encryptedText) {
-  navigator.clipboard
-    .writeText(encryptedText)
-    .then(() => {
-      console.log("Texto copiado al portapapeles:", encryptedText);
-    })
-    .catch((err) => {
-      console.error("Error al copiar texto al portapapeles:", encryptedText);
-    });
-}
-
-// Desencriptar el texto
+/*--------------------DESENCRIPTA EL TEXTO----------------------*/
 function decryptText(newEncryptedText) {
   let newDecryptedText = newEncryptedText
     .replace(/enter/gi, "e")
@@ -78,30 +83,27 @@ function decryptText(newEncryptedText) {
     .replace(/ai/gi, "a")
     .replace(/ober/gi, "o")
     .replace(/ufat/gi, "u");
-
-  console.log(newDecryptedText);
+  
   showHideMessage(newDecryptedText);
 }
 
-// Muestra los mensajes encriptados o desencriptados
+/*--------------------COPIA EL TEXTO ENCRIPTADO AL PORTAPAPELES----------------------*/
+function copyEncryptedText(encryptedText) {
+  navigator.clipboard
+    .writeText(encryptedText)
+ }
+
+/*--------------------MUESTRA LOS MENSAJES ENCRIPTADOS/DESENCRIPTADOS----------------------*/
 
 function showHideMessage(params) {
   if (params.length != 0) {
-    noMessage.setAttribute("class", "hidden");
-
-    showMessage.classList.remove("hidden");
-
-    result.textContent = params;
+    result.classList.remove("hidden");
+    noResult.classList.add("hidden");
+    resultMessage.textContent = params;
 
     //Captura el texto al clickear el boton 'copiar'
     btnCopy.addEventListener("click", () => {
       copyEncryptedText(params);
     });
   }
-}
-
-// Verifica el formato del mensaje: minúsculas, sin acentos, acepta números
-function verifyText(params) {
-  let regex = /^[a-z0-9]+$/; //Expresión regular para la verificación
-  return regex.test(params)
 }

@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Encriptador de texto" />
-
+    <link rel="stylesheet" type="text/css" href="reset.css" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Poiret+One&display=swap"
       rel="stylesheet" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
     <title>Encriptador de texto || Alura Challenges ONE</title>
   </head>
 
   <body>
-    <!-------------------------------------------------------------->
+    <!-- HEADER -->
     <header class="header">
-      <a href="https://www.aluracursos.com/" target="_blank"
+      <a class="header__img" href="https://www.aluracursos.com/" target="_blank"
         ><img src="./assets/logo.svg" alt="logo de alura latam" id="alura-logo"
       /></a>
 
       <nav class="header__nav">
-        <ul>
-          <li>
+        <ul class="header__list">
+          <li class="header__item">
             <a
               href="https://github.com/Hoshi-Dev"
-              class="header__nav-links"
+              class="header__links"
               target="_blank"
               >github</a
             >
@@ -34,7 +37,7 @@
           <li>
             <a
               href="https://www.linkedin.com/in/andrea-elizabeth-baez-rivero/"
-              class="header__nav-links"
+              class="header__links"
               target="_blank"
               >linkedin</a
             >
@@ -43,38 +46,45 @@
       </nav>
     </header>
 
-    <!-------------------------------------------------------------->
+    <!-- MAIN -->
 
     <main class="container">
       <section class="container__message">
-        <div class="container__message-input_text">
-          <h1 id="tittle">Encriptador de palabras</h1>
-          <p>Challenge para Alura LATAM x Oracle ONE || G6</p>
-        </div>
+        <h1 class="container__message__tittle title">Encriptador de palabras</h1>
+        <p>Challenge para Alura LATAM x Oracle ONE || G6</p>
 
         <textarea
           name="message"
-          id="message"
+          class="container__message__text-input js-container__message__text-input"
           cols="30"
           rows="10"
           placeholder="Ingrese el texto aquí..."></textarea>
 
-        <div class="container__message_text">
-          <img
-            src="./assets/bi_exclamation-circle-fill.svg"
-            alt="icono de advertencia" />
-          <p>Solo letras minúsculas y sin acentos</p>
-        </div>
+        <!-- verificación de texto -->
+        <div class="container__message__verification">
+          <span
+            class="container__message__verification-red js-container__message__verification-red hidden">
+            <img src="./assets/exclamation.svg" alt="icono de advertencia" />
+            <p>Solo letras minúsculas y sin acentos</p>
+          </span>
 
-        <div class="container__message-buttons">
+          <span
+            class="container__message__verification-green js-container__message__verification-green hidden">
+            <img src="./assets/check.svg" alt="icono de check" />
+            <p>Formato correcto. Encriptando...</p>
+          </span>
+        </div>
+        <!----------------------->
+
+        <div class="container__message__buttons">
           <input
-            class="btns"
-            id="btn-encrypt"
+            disabled="true"
+            id="js-btn-encrypt"
             type="button"
             value="Encriptar" />
           <input
-            class="btns"
-            id="btn-decrypt"
+            disabled="true"
+            id="js-btn-decrypt"
             type="button"
             value="Desencriptar" />
         </div>
@@ -83,18 +93,22 @@
       <!-------------------------------------------------------------->
 
       <section class="container__encrypted-message" id="encrypted">
-        <div id="no-message">
+        <div class="container__encrypted-message__no-result js-container__encrypted-message__no-result hidden">
           <img
             src="./assets/Cyber Security Lock With Wires.svg"
-            alt="candado ciberseguridad"
-            id="img-encrypt" />
+            alt="candado ciberseguridad" />
 
           <h3>Ningún mensaje fue encontrado</h3>
           <p>Ingresa el texto que desee encriptar o desencriptar</p>
         </div>
-        <div class="hidden" id="show-message">
-          <p id="result"></p>
-          <input class="btns" type="button" id="btn-copy" value="Copiar" />
+
+        <div class="container__encrypted-message__result js-container__encrypted-message__result " id="show-message">
+          
+          <p id="js-result-message"> blanditiis doloremque officia maxime reiciendis repellendus pariatur voluptatem quas enim quae ad, nesciunt aperiam amet voluptate aspernatur tenetur. Eligendi reprehenderit delectus necessitatibus sit soluta esse ipsum quasi fugiat dolorem, odit, atque vitae sapiente architecto nesciunt.
+            
+            
+          </p>
+          <input  type="button" id="js-btn-copy" value="Copiar" />
         </div>
       </section>
     </main>
@@ -104,7 +118,5 @@
     <footer class="footer">Hoshi-Dev || 2024</footer>
 
     <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
   </body>
 </html>
