@@ -91,6 +91,15 @@ function decryptText(newEncryptedText) {
 function copyEncryptedText(encryptedText) {
   navigator.clipboard
     .writeText(encryptedText)
+    .then(() =>{
+      textArea.style.outline = "none";
+      textArea.value = "";
+      verifyRed.classList.add("hidden");
+      verifyGreen.classList.add("hidden");
+      result.classList.add("hidden");
+      noResult.classList.remove("hidden");
+    })
+
  }
 
 /*--------------------MUESTRA LOS MENSAJES ENCRIPTADOS/DESENCRIPTADOS----------------------*/

@@ -11,17 +11,22 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Poiret+One&display=swap"
       rel="stylesheet" />
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"
+      rel="stylesheet" />
     <title>Encriptador de texto || Alura Challenges ONE</title>
   </head>
 
   <body>
     <!-- HEADER -->
     <header class="header">
-      <a class="header__img" href="https://www.aluracursos.com/" target="_blank"
-        ><img src="./assets/logo.svg" alt="logo de alura latam" id="alura-logo"
+      <a href="https://www.aluracursos.com/" target="_blank"
+        ><img
+          src="./assets/logo.svg"
+          alt="logo de alura latam"
+          class="header__img"
       /></a>
 
       <nav class="header__nav">
@@ -50,7 +55,9 @@
 
     <main class="container">
       <section class="container__message">
-        <h1 class="container__message__tittle title">Encriptador de palabras</h1>
+        <h1 class="container__message__tittle title">
+          Encriptador de palabras
+        </h1>
         <p>Challenge para Alura LATAM x Oracle ONE || G6</p>
 
         <textarea
@@ -93,7 +100,8 @@
       <!-------------------------------------------------------------->
 
       <section class="container__encrypted-message" id="encrypted">
-        <div class="container__encrypted-message__no-result js-container__encrypted-message__no-result hidden">
+        <div
+          class="container__encrypted-message__no-result js-container__encrypted-message__no-result ">
           <img
             src="./assets/Cyber Security Lock With Wires.svg"
             alt="candado ciberseguridad" />
@@ -102,13 +110,12 @@
           <p>Ingresa el texto que desee encriptar o desencriptar</p>
         </div>
 
-        <div class="container__encrypted-message__result js-container__encrypted-message__result " id="show-message">
+        <div
+          class="container__encrypted-message__result js-container__encrypted-message__result hidden"
+          id="show-message">
+          <p id="js-result-message"></p>
           
-          <p id="js-result-message"> blanditiis doloremque officia maxime reiciendis repellendus pariatur voluptatem quas enim quae ad, nesciunt aperiam amet voluptate aspernatur tenetur. Eligendi reprehenderit delectus necessitatibus sit soluta esse ipsum quasi fugiat dolorem, odit, atque vitae sapiente architecto nesciunt.
-            
-            
-          </p>
-          <input  type="button" id="js-btn-copy" value="Copiar" />
+          <input type="button" id="js-btn-copy" value="Copiar" />
         </div>
       </section>
     </main>
